@@ -14,9 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 import com.stripe.Stripe;
-import com.stripe.net.ApiResource;
 import com.stripe.model.Event;
-import com.stripe.model.EventDataObjectDeserializer;
 import com.stripe.model.PaymentIntent;
 import com.stripe.exception.*;
 import com.stripe.net.Webhook;
@@ -62,8 +60,7 @@ public class Server {
 
     public static void main(String[] args) {
         port(4242);
-        String ENV_PATH = "../../../";
-        Dotenv dotenv = Dotenv.configure().directory(ENV_PATH).load();
+        Dotenv dotenv = Dotenv.load();
 
         Stripe.apiKey = dotenv.get("STRIPE_SECRET_KEY");
 
@@ -74,7 +71,7 @@ public class Server {
             response.type("application/json");
 
             Map<String, Object> responseData = new HashMap<>();
-            responseData.put("publicKey", dotenv.get("STRIPE_PUBLIC_KEY"));
+            responseData.put("publicKey", dotenv.get("STRIPE_PUBLISHABLE_KEY"));
             responseData.put("amount", dotenv.get("AMOUNT"));
             responseData.put("currency", dotenv.get("CURRENCY"));
             return gson.toJson(responseData);
@@ -91,8 +88,8 @@ public class Server {
                     .build();
             // Create a PaymentIntent with the order amount and currency
             PaymentIntent intent = PaymentIntent.create(createParams);
-            // Send public key and PaymentIntent details to client
-            return gson.toJson(new CreatePaymentResponse(dotenv.get("STRIPE_PUBLIC_KEY"), intent.getClientSecret()));
+            // Send publishable key and PaymentIntent details to client
+            return gson.toJson(new CreatePaymentResponse(dotenv.get("STRIPE_PUBLISHABLE_KEY"), intent.getClientSecret()));
         });
 
         post("/webhook", (request, response) -> {

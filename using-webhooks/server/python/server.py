@@ -29,9 +29,9 @@ def get_checkout_page():
     return render_template('index.html')
 
 @app.route('/config', methods=['GET'])
-def get_public_key():
+def get_PUBLISHABLE_KEY():
     return jsonify({
-      'publicKey': os.getenv('STRIPE_PUBLIC_KEY'),
+      'publicKey': os.getenv('STRIPE_PUBLISHABLE_KEY'),
       'amount': os.getenv('AMOUNT'),
       'currency': os.getenv('CURRENCY')
     })
@@ -55,8 +55,8 @@ def create_payment():
     )
 
     try:
-        # Send public key and PaymentIntent details to client
-        return jsonify({'publicKey': os.getenv('STRIPE_PUBLIC_KEY'), 'clientSecret': intent.client_secret})
+        # Send publishable key and PaymentIntent details to client
+        return jsonify({'publicKey': os.getenv('STRIPE_PUBLISHABLE_KEY'), 'clientSecret': intent.client_secret})
     except Exception as e:
         return jsonify(str(e)), 403
 

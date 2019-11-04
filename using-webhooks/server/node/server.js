@@ -2,9 +2,7 @@ const express = require("express");
 const app = express();
 const { resolve } = require("path");
 // Replace if using a different env file or config
-const ENV_PATH = "../../../.env";
-const envPath = resolve(ENV_PATH);
-const env = require("dotenv").config({ path: envPath });
+const env = require("dotenv").config({ path: "./.env" });
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 app.use(express.static(process.env.STATIC_DIR));
@@ -22,7 +20,7 @@ app.use(
 
 app.get("/config", (req, res) => {
   res.send({
-    publicKey: process.env.STRIPE_PUBLIC_KEY,
+    publicKey: process.env.STRIPE_PUBLISHABLE_KEY,
     amount: process.env.AMOUNT,
     currency: process.env.CURRENCY
   });
@@ -50,9 +48,9 @@ app.post("/create-payment-intent", async (req, res) => {
     currency: process.env.CURRENCY
   });
 
-  // Send public key and PaymentIntent details to client
+  // Send publishable key and PaymentIntent details to client
   res.send({
-    publicKey: process.env.STRIPE_PUBLIC_KEY,
+    publicKey: process.env.STRIPE_PUBLISHABLE_KEY,
     clientSecret: paymentIntent.client_secret
   });
 });
