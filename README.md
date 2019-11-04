@@ -6,19 +6,13 @@ During the payment process, [a PaymentIntent object is created](https://stripe.c
 
 The [Payment Intents API](https://stripe.com/docs/api/payment_intents) abstracts away these separate steps by handling all steps of the process through the [confirm method](https://stripe.com/docs/api/payment_intents/confirm). After you create a PaymentIntent, call confirm referencing the [FPX Element](https://stripe.com/docs/stripe-js/elements/fpx-bank#submit-payment) to redirect, authenticate, and capture the funds in one API call.
 
-<!--
 ## Demo
 
-See a [hosted version](https://hhqhp.sse.codesandbox.io/) of the sample or fork a copy on [codesandbox.io](https://codesandbox.io/s/stripe-sample-web-elements-card-payment-hhqhp)
+See a [hosted version](https://j6rzh.sse.codesandbox.io/) of the sample or fork a copy on [codesandbox.io](https://codesandbox.io/s/stripe-sample-web-elements-fpx-payment-j6rzh).
 
-The demo is running in test mode -- use `4242424242424242` as a test card number with any CVC code + a future expiration date.
+The demo is running in test mode. You will see a Stripe test mode redirect page.
 
-Use the `4000000000003220` test card number to trigger a 3D Secure challenge flow.
-
-Read more about testing on Stripe at https://stripe.com/docs/testing.
-
-<img src="./web-elements-card-payment.gif" alt="Accepting a card payment on the web" align="center">
- -->
+<img src="./web-elements-fpx-payment.gif" alt="Creating an FPX bank transfer" align="center">
 
 ## Webhooks
 
