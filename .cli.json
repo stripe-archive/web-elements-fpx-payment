@@ -1,0 +1,12 @@
+{
+    "name": "web-elements-fpx-payment",
+    "configureDotEnv": true,
+    "integrations": [
+      {
+        "name": "using-webhooks",
+        "clients": ["web"],
+        "servers": ["java", "node", "php-slim", "python", "ruby"]
+      }
+    ]
+  }
+  
