@@ -106,14 +106,17 @@ var setupElements = function(data) {
 };
 
 /*
- * Calls stripe.handleFpxPayment which redirects to the selected bank.
+ * Calls stripe.confirmFpxPayment which redirects to the selected bank.
  */
 var pay = function(stripe, fpxBank, clientSecret) {
   changeLoadingState(true);
 
   // Initiate the payment.
   stripe
-    .handleFpxPayment(clientSecret, fpxBank, {
+    .confirmFpxPayment(clientSecret, {
+      payment_method: {
+        fpx: fpxBank
+      },
       return_url: `${window.location.href}`
     })
     .then(function(result) {
