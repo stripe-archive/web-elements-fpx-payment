@@ -1,5 +1,4 @@
-> <img src="https://stripe.dev/images/badges/archived.png" align="left" width="250"> This project is deprecated and is no longer being actively being actively maintained. Please see the [Accept a payment](https://github.com/stripe-samples/accept-a-payment) sample showing how to implement FPX with Elements and more.
-
+> <img src="https://stripe.dev/images/badges/archived.png" align="left" width="250"> This project is deprecated and is no longer being actively being actively maintained.
 
 # Creating an FPX bank transfer
 
